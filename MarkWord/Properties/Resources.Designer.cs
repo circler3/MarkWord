@@ -19,7 +19,7 @@ namespace MarkWord.Properties {
     // 类通过类似于 ResGen 或 Visual Studio 的工具自动生成的。
     // 若要添加或移除成员，请编辑 .ResX 文件，然后重新运行 ResGen
     // (以 /str 作为命令选项)，或重新生成 VS 项目。
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -47,7 +47,7 @@ namespace MarkWord.Properties {
         }
         
         /// <summary>
-        ///   使用此强类型资源类，为所有资源查找
+        ///   重写当前线程的 CurrentUICulture 属性
         ///   重写当前线程的 CurrentUICulture 属性。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -78,30 +78,14 @@ namespace MarkWord.Properties {
         }
         
         /// <summary>
-        ///   查找类似 &lt;!--sublog
-        ///{
-        ///    &quot;title&quot;:&quot;Sublog: 支持Markdown和语法高亮的跨平台博客客户端&quot;,
-        ///    &quot;category&quot;:&quot;Thinking&quot;,
-        ///    &quot;tags&quot;:&quot;&quot;,
-        ///    &quot;publish&quot;:&quot;true&quot;,
-        ///    &quot;blog_id&quot;:&quot;3151861&quot;
-        ///}
-        ///sublog--&gt;
+        ///   查找类似 &lt;!--
         ///
-        ///灵感来自[米米饭](http://www.cnblogs.com/meetrice/archive/2013/02/14/2911238.html)
+        /// MarkWord  v0.1  墨云软件 2016-06-26
         ///
-        ///## 功能一览
-        ///[为什么你应该试试用Sublog写博客](http://www.cnblogs.com/zhengwenwei/p/3175646.html)
+        ///--&gt;
         ///
-        ///## 项目主页：
-        ///[sublog](https://github.com/AmongOthers/sublog)
-        ///
-        ///
-        ///## 使用方法：
-        ///
-        ///1. 本项目是一个插件，首先要安装[Sublime Text 2](http://www.sublimetext.com/2)
-        ///
-        ///1. 重命名sublog.sublime-settings.exampl [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///## MarkWord
+        ///&gt; 从这里开始……  的本地化字符串。
         /// </summary>
         internal static string test {
             get {
