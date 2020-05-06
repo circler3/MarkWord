@@ -6,6 +6,7 @@ using System.Text;
 using HtmlAgilityPack;
 using System.Net;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace MarkWord.BLL
 {
@@ -31,7 +32,8 @@ namespace MarkWord.BLL
 
             SendMsg(5, procIndex, "准备数据中……");
             //转换为html
-            string Blogs = string.Format("<!-- edit by MarkWord 墨云软件 -->\r\n{0}", CommonMark.CommonMarkConverter.Convert(Markdown));
+            //string Blogs = string.Format("<!-- edit by MarkWord 墨云软件 -->\r\n{0}", CommonMark.CommonMarkConverter.Convert(Markdown));
+            string Blogs = Markdown;
             metaTools.Url = apiUrl;
 
 
@@ -39,7 +41,8 @@ namespace MarkWord.BLL
 
             //分类
             List<string> tmpCategories = new List<string>();
-            tmpCategories.Add("");//添加空分类，是因为部分博客(如csdn)字段这部分为必填字段不添加会产生异常
+            //see https://group.cnblogs.com/topic/80721.html
+            tmpCategories.Add("[Markdown]");//添加空分类，是因为部分博客(如csdn)字段这部分为必填字段不添加会产生异常
             blogsPost.categories = tmpCategories.ToArray();
 
             //添加时间
@@ -53,25 +56,30 @@ namespace MarkWord.BLL
             blogsPost.postid = postId;
 
             //内容
-            blogsPost.description = BlogsModel.Contains("{0}") ?//必须使用{0}占位符
-                string.Format(BlogsModel, Blogs) : //根据模板生成数据 主要是为了制定Markdown模板
-                BlogsModel + Blogs; //通过前缀方式添加
+            //blogsPost.description = BlogsModel.Contains("{0}") ?//必须使用{0}占位符
+            //    string.Format(BlogsModel, Blogs) : //根据模板生成数据 主要是为了制定Markdown模板
+            //    BlogsModel + Blogs; //通过前缀方式添加
+            //直接使用markdown发布
+            blogsPost.description = Blogs;
 
             //开始查找图片并更新到服务器
-            HtmlDocument htmlDoc = new HtmlDocument();
+            //HtmlDocument htmlDoc = new HtmlDocument();
             WebClient webClient = new WebClient();
-            htmlDoc.LoadHtml(blogsPost.description);
-            var ImgList = htmlDoc.DocumentNode.Descendants("img");
+            //htmlDoc.LoadHtml(blogsPost.description);
+            //var ImgList = htmlDoc.DocumentNode.Descendants("img");
 
-            int procCount = 3 + ImgList.Count();
+            var rex = "!\\[[^\\]]+\\]\\([^\\)]+\\)";
+            var ImgList = Regex.Matches(Blogs,rex);
 
-            SendMsg(procCount, procIndex++, string.Format("数据分析完成，总共需要上传{0}张图片", ImgList.Count()));
+            int procCount = 3 + ImgList.Count;
+
+            SendMsg(procCount, procIndex++, string.Format("数据分析完成，总共需要上传{0}张图片", ImgList.Count));
             int imgErr = 0;//图片上传错误数量
             foreach (var i in ImgList)
             {
                 SendMsg(procCount, procIndex++, "正在上传图片数据……");
                 //获取图片文件字符串
-                string ImgUrl = i.GetAttributeValue("src", "");
+                string ImgUrl = Regex.Match(i.ToString(), "(?<=\\().+?(?=\\))").Value;
                 if (string.IsNullOrEmpty(ImgUrl))
                 {
                     imgErr++;

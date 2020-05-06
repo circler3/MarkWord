@@ -1074,7 +1074,8 @@ namespace MarkWord
             {
                 string filePath = Config.imgcacheDir + "\\" + System.IO.Path.GetRandomFileName() + ".png";
                 img.Save(filePath, System.Drawing.Imaging.ImageFormat.Png);
-                markEdit.textEditor.SelectedText = string.Format("![img](file:///{0})", System.Web.HttpUtility.UrlEncode(filePath).Replace("+", "%20"));
+                //markEdit.textEditor.SelectedText = string.Format("![img](file:///{0})", System.Web.HttpUtility.UrlEncode(filePath).Replace("+", "%20"));
+                markEdit.textEditor.SelectedText = $"![img]({new Uri(filePath).AbsoluteUri})";
             }
         }
 
