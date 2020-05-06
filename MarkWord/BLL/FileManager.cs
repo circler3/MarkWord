@@ -5,6 +5,8 @@ using System.Text;
 using Microsoft.Win32;
 
 using System.IO;
+using System.Windows;
+using System.Resources;
 
 namespace MarkWord.BLL
 {
@@ -162,8 +164,9 @@ namespace MarkWord.BLL
             if (!File.Exists(file))
             {
                 Config.Common.StyleName = "DefaultStyle";
-                Config.Style = Properties.Resources.DefaultStyle;
-                return;
+                var stream = Application.GetResourceStream(new Uri("pack://application:,,,/Style/DefaultStyle.css"));
+                Config.Style = new StreamReader(stream.Stream).ReadToEnd();
+                return; 
             }
             Config.Common.StyleName = styleName;
             Config.Style = File.ReadAllText(file, Encoding.UTF8);

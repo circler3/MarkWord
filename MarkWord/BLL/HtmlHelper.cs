@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Resources;
 using System.Text;
+using System.Windows;
+using System.Windows.Forms.PropertyGridInternal;
 
 namespace MarkWord.BLL
 {
@@ -18,7 +22,7 @@ namespace MarkWord.BLL
 
 {0}
 
-", string.IsNullOrEmpty(Config.Style) ? Properties.Resources.DefaultStyle : Config.Style);
+", string.IsNullOrEmpty(Config.Style) ? new StreamReader(Application.GetResourceStream(new Uri("pack://application:,,,/Style/DefaultStyle.css")).Stream).ReadToEnd() : Config.Style);
             #endregion 
             sbr.AppendLine("</style>");
             sbr.AppendLine("<script type='text/javascript'>");

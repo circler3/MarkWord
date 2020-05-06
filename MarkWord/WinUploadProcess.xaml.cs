@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -48,7 +49,13 @@ namespace MarkWord
                  Config.CurrBlogsDocument.PostId = postId;
                  if (this.OpenWhenPublish)
                  {
-                     System.Diagnostics.Process.Start(Config.Blogs.BlogsUrl);
+                     var p = new Process();
+                     p.StartInfo = new ProcessStartInfo(Config.Blogs.BlogsUrl)
+                     {
+                         UseShellExecute = true
+                     };
+                     p.Start();
+                     //System.Diagnostics.Process.Start(Config.Blogs.BlogsUrl);
                  }
 
                  pane_input.Dispatcher.Invoke(new DisplayHandler(() =>

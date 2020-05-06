@@ -22,7 +22,7 @@ namespace MarkWord
         {
             get
             {
-                return new BitmapImage(new Uri("pack://application:,,,/MarkWord;Component/Images/T_SelectParent_Sm_N.png", UriKind.Absolute));
+                return new BitmapImage(new Uri("pack://application:,,,/Images/T_SelectParent_Sm_N.png", UriKind.Absolute));
             }
         }
 

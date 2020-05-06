@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -67,7 +68,8 @@ namespace MarkWord
         {
             get
             {
-                return Environment.CurrentDirectory + "\\Source\\Style";
+                System.IO.Directory.CreateDirectory(Path.Combine(Environment.CurrentDirectory,"Style"));
+                return Path.Combine(Environment.CurrentDirectory, "Style");
             }
         }
         /// <summary>
@@ -77,7 +79,7 @@ namespace MarkWord
         {
             get
             {
-                return Environment.CurrentDirectory + "\\Source\\Script";
+                return Environment.CurrentDirectory + "\\Script";
             }
         }
 
