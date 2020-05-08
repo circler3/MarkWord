@@ -1,3 +1,6 @@
+# Notice
+This branch is modified to leverage `Markdown` publish. Stlyes are disabled and post is published by raw markdown. This branch is refactored with .NET Core 3.1. However, not all functions are reviewed.
+
 # MarkWord
 a Markdown editer. powered by 墨云软件
 #### Characteristic:
